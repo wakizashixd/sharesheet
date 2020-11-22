@@ -21,17 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    //    @RequestMapping("/user")
-//    public String getUserPage(Model model) {
-//        List<User> users = new ArrayList<>();
-//        users.add(new User(1,"Peter",1234));
-//        users.add(new User (2,"Nancy",2345));
-//        users.add(new User (3,"Rick",3456));
-//        model.addAttribute("allUsers",users);
-//        return "user";
-//
-//    }
-//ArrayList<User> users = new ArrayList<>();
 
     @GetMapping
     public String getUserPage(Model model) {
