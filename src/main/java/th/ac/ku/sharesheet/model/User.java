@@ -3,9 +3,9 @@ package th.ac.ku.sharesheet.model;
 public class User {
     private int id;
     private String name;
-    private int pin;
+    private String pin;
 
-    public User(int id, String name, int pin) {
+    public User(int id, String name, String pin) {
         this.id = id;
         this.name = name;
         this.pin = pin;
@@ -27,11 +27,11 @@ public class User {
         this.name = name;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 }
