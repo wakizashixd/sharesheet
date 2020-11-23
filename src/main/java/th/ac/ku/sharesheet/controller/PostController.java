@@ -2,10 +2,8 @@ package th.ac.ku.sharesheet.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import th.ac.ku.sharesheet.data.PostRepository;
 import th.ac.ku.sharesheet.model.Post;
 import th.ac.ku.sharesheet.service.PostService;
 
@@ -13,6 +11,7 @@ import th.ac.ku.sharesheet.service.PostService;
 @RequestMapping("/post")
 public class PostController {
     private PostService postService;
+    private PostRepository repository;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -25,9 +24,11 @@ public class PostController {
     }
 
     @PostMapping
-    public String CreatePost(@ModelAttribute Post post,Model model){
+    public String createPost(@ModelAttribute Post post,Model model){
         postService.createPost(post);
-        model.addAttribute("allPosts",postService.getPosts());
+        model.addAttribute("allPost",postService.getPosts());
         return "redirect:post";
     }
+
+
 }

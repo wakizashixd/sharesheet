@@ -1,26 +1,43 @@
 package th.ac.ku.sharesheet.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
+import th.ac.ku.sharesheet.data.PostRepository;
 import th.ac.ku.sharesheet.model.Post;
 
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class PostService {
-    private List<Post> postList;
 
-    @PostConstruct
-    public void postConstruct() {
-        this.postList = new ArrayList<>();
+    private PostRepository repository;
+
+    public PostService(PostRepository repository){
+        this.repository = repository;
     }
 
-    public void createPost(Post post){
-        postList.add(post);
+    public Post findPost(int id){
+        try {
+            return repository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
+
+    public void createPost(Post post) {
+        repository.save(post);
+    }
+
     public List<Post> getPosts() {
-        return new ArrayList<>(this.postList);
+        return repository.findAll();
     }
+
+
 }

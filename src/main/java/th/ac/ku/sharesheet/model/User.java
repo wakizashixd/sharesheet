@@ -2,8 +2,10 @@ package th.ac.ku.sharesheet.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user", schema = "sharesheet")
 public class User {
 
     @Id
