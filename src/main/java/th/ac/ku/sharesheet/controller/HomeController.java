@@ -1,6 +1,5 @@
 package th.ac.ku.sharesheet.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +16,11 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String getHomePage(Model model) {
-        model.addAttribute("greeting", "Sawaddee");
+        model.addAttribute("greeting", "ยินดีต้อนรับสู่ ShareSheet");
         model.addAttribute("allPost",postService.getPosts());
-        // return home.html
-        return "home";
+        return "home";         // return home.html
     }
+
+
 
 }

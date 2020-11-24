@@ -11,7 +11,6 @@ public class User {
     @Id
     private int id;
 
-
     private String name;
     private String pin;
 
@@ -45,5 +44,14 @@ public class User {
 
     public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pin='" + pin + '\'' +
+                '}';
     }
 }

@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.sharesheet.model.User;
 import th.ac.ku.sharesheet.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -25,12 +22,11 @@ public class UserController {
     @GetMapping
     public String getUserPage(Model model) {
         model.addAttribute("allUsers",userService.getUsers());
-        return "user";  // customer.html
+        return "user";  // go to user.html
     }
 
     @PostMapping
     public String registerUser(@ModelAttribute User user, Model model) {
-//        users.add(user);
         userService.createUser(user);
         model.addAttribute("allUsers",userService.getUsers());
         return "redirect:user";

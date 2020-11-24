@@ -1,7 +1,6 @@
 package th.ac.ku.sharesheet.service;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import th.ac.ku.sharesheet.data.UserRepository;
 import th.ac.ku.sharesheet.model.User;

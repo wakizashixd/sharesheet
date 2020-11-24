@@ -1,9 +1,9 @@
 package th.ac.ku.sharesheet.controller;
 
+import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import th.ac.ku.sharesheet.data.PostRepository;
 import th.ac.ku.sharesheet.model.Post;
 import th.ac.ku.sharesheet.service.PostService;
 
@@ -11,7 +11,6 @@ import th.ac.ku.sharesheet.service.PostService;
 @RequestMapping("/post")
 public class PostController {
     private PostService postService;
-    private PostRepository repository;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -29,6 +28,17 @@ public class PostController {
         model.addAttribute("allPost",postService.getPosts());
         return "redirect:post";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deletePost(@PathVariable int id,
+                                @ModelAttribute Post post,
+                                Model model){
+        postService.deletePost(post);
+        model.addAttribute("allPost",postService.getPosts());
+        return "post";
+    }
+
+
 
 
 }

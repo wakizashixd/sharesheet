@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.sharesheet.model.User;
+import th.ac.ku.sharesheet.service.PostService;
 import th.ac.ku.sharesheet.service.UserService;
 
 @Controller
@@ -14,9 +15,12 @@ import th.ac.ku.sharesheet.service.UserService;
 public class LoginController {
 
     private UserService userService;
+    private PostService postService;
 
-    public LoginController(UserService userService) {
+    public LoginController(UserService userService,
+                           PostService postService) {
         this.userService = userService;
+        this.postService = postService;
     }
 
 
@@ -26,17 +30,17 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@ModelAttribute User customer, Model model) {
-        // 1. เอา id กับ pin ไปเช็คกับข้อมูล customer ที่มีอยู่ ว่าตรงกันบ้างไหม
-        User matchingCustomer = userService.checkPin(customer);
+    public String login(@ModelAttribute User user, Model model) {
+        // 1. เอา id กับ pin ไปเช็คกับข้อมูล user ที่มีอยู่ ว่าตรงกันบ้างไหม
+        User matchingUser = userService.checkPin(user);
 
-        // 2. ถ้าตรง ส่งข้อมูล customer กลับไปแสดงผล
-        if (matchingCustomer != null) {
+        // 2. ถ้าตรง ส่งข้อมูล user กลับไปแสดงผล
+        if (matchingUser != null) {
             model.addAttribute("greeting",
-                    "Welcome, " + matchingCustomer.getName());
+                    "Welcome, " + matchingUser.getName());
         } else {
-            // 3. ถ้าไม่ตรง แจ้งว่าไม่มีข้อมูล customer นี้
-            model.addAttribute("greeting", "Can't find customer");
+            // 3. ถ้าไม่ตรง แจ้งว่าไม่มีข้อมูล user นี้
+            model.addAttribute("greeting", "Can't find User");
         }
         return "home";
     }

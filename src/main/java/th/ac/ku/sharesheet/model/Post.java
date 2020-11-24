@@ -1,15 +1,14 @@
 package th.ac.ku.sharesheet.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "post", schema = "sharesheet")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
 
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int post_id;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
 
     private String namepost;
     private String description;
@@ -19,19 +18,19 @@ public class Post {
 
     }
 
-    public Post(int post_id, String namepost, String description, String file) {
-        this.post_id = post_id;
+    public Post(int id, String namepost, String description, String file) {
+        this.id = id;
         this.namepost = namepost;
         this.description = description;
         this.file = file;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNamepost() {
@@ -61,7 +60,7 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "post_id=" + post_id +
+                "post_id=" + id +
                 ", namePost='" + namepost + '\'' +
                 ", description='" + description + '\'' +
                 ", file='" + file + '\'' +

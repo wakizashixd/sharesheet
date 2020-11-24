@@ -1,42 +1,57 @@
 package th.ac.ku.sharesheet.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
-import th.ac.ku.sharesheet.data.PostRepository;
 import th.ac.ku.sharesheet.model.Post;
 
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 @Service
 public class PostService {
 
-    private PostRepository repository;
+    private RestTemplate restTemplate;
 
-    public PostService(PostRepository repository){
-        this.repository = repository;
+    public PostService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
-    public Post findPost(int id){
-        try {
-            return repository.findById(id).get();
-        } catch (NoSuchElementException e) {
-            return null;
-        }
-    }
 
-    public void createPost(Post post) {
-        repository.save(post);
+
+    public List<Post> getUserPostAccount(int post_id) {
+        String url = "http://localhost:8081/api/post/" +
+                post_id;
+        ResponseEntity<Post[]> response =
+                restTemplate.getForEntity(url, Post[].class);
+
+        Post[] accounts = response.getBody();
+
+        return Arrays.asList(accounts);
     }
 
     public List<Post> getPosts() {
-        return repository.findAll();
+        String url = "http://localhost:8081/api/post/";
+        ResponseEntity<Post[]> response =
+                restTemplate.getForEntity(url, Post[].class);
+
+        Post[] accounts = response.getBody();
+
+        return Arrays.asList(accounts);
+
+    }
+
+    public void createPost(Post post){
+        String url = "http://localhost:8081/api/post/";
+        restTemplate.postForObject(url, post, Post.class);
+    }
+
+
+    public void deletePost(Post post){
+        String url = "http://localhost:8081/api/post/" +
+                post.getId();
+        restTemplate.delete(url,post);
     }
 
 

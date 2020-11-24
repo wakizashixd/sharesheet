@@ -2,55 +2,64 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}"
       xmlns:th="https://www.thymeleaf.org/%22%3E">
-<div class="container" layout:fragment="content">
-<h1>Create Post</h1>
-<form action="#" th:action="@{/post}" method="POST">
-    <div class="form-group">
-        <label for="inputNamePost">ชื่อเรื่อง</label>
-        <input type="input" class="form-control" name="namepost" id="inputNamePost">
-    </div>
+<body style="background-color: #789CCE ">
+<div class="container" layout:fragment="content" >
+    <br>
+    <h1 style="color: white"><strong>Create Post</strong></h1>
+    <br>
+    <form action="#" th:action="@{/post}" method="POST">
+        <div class="form-group">
+            <label for="inputNamePost">Topic</label>
+            <input type="input" class="form-control" name="namepost" id="inputNamePost" placeholder="Enter your topic here ..">
+        </div>
 
-    <div class="form-group">
-        <label for="inputDescription">คำอธิบาย</label>
-        <textarea class="form-control" id="inputDescription" name="description" rows="3"></textarea>
-    </div>
+        <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <textarea class="form-control" id="inputDescription" name="description" rows="3" placeholder="Write some detail .."></textarea>
+        </div>
 
-    <div class="form-group">
-        <label >Link File</label>
-        <input type="text" class="form-control" name="file" placeholder="link file..">
-    </div>
-
-
+        <div class="form-group">
+            <label >File Link</label>
+            <input type="text" class="form-control" name="file" placeholder="Put your file url here ..">
+        </div>
 
 
-    <div class="form-group">
-        <input type="submit" class="btn btn-primary">
-    </div>
-</form>
-<hr>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success">
+        </div>
+    </form>
+    <hr>
 
-<h1>All Posts</h1>
-    <div class="table-responsive-md">
-<table class="table table-bordered">
-    <thead class="thead-light">
-    <tr>
-        <th>ชื่อเรื่อง</th>
-        <th>คำอธิบาย</th>
-        <th>ไฟล์</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="post: ${allPost}">
-        <td th:text="${post.namepost}"></td>
-        <td th:text="${post.description}"></td>
+    <h1 style="color: white">Post Lists</h1>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Topic</th>
+            <th>Description</th>
+            <th>File</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody style="background-color: #FFCDCD">
+        <tr th:each="post: ${allPost}">
+            <td th:text="${post.id}"></td>
+            <td th:text="${post.namepost}"></td>
+            <td th:text="${post.description}"></td>
 
-        <td>
-            <a th:href="${post.file}" target="_blank"><button class="btn btn-primary">link file</button></a>
-        </td>
+            <td>
+                <a th:href="${post.file}"target="_blank"><button class="btn btn-primary">Go to File</button> </a>
+            </td>
 
-    </tr>
-    </tbody>
-</table>
-    </div>
+            <td>
+                <form th:action="@{/post/delete/{id}(id=${post.id})}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 </div>
+</body>
 </html>

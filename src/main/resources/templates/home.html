@@ -2,37 +2,56 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}"
       xmlns:th="https://www.thymeleaf.org">
-
-<div layout:fragment="content" class="container">
-    <div class="jumbotron">
-        <h1 class="display-4 "  th:text="${greeting}"></h1>
-        <p><a th:href="@{/user}">User Registration</a></p>
-        <p>bless love sia O && ken too (parin hopper 0420)</p>
+<body style="background-color: #789CCE ">
+<div layout:fragment="content" class="container" >
+    <div class="jumbotron shadow rounded" style="background: #97C1A9">
+        <h1 class="display-4 "  th:text="${greeting}" style="text-align: center;color: white"></h1>
+        <a th:href="@{/user}"><button class="btn btn-warning">User Registration</button></a>
     </div>
+
+    <hr>
+    <h1 style="color: whitesmoke">All Posts</h1>
     <br>
-<hr>
-    <br>
-    <h1>All Posts</h1>
     <div class="row ">
         <div class="card shadow p-3 mb-5 bg-white rounded mr-5" style="width: 18rem;" th:each="post: ${allPost}" >
             <div class="card-body">
                 <h5 class="card-title" th:text="${post.namepost}"></h5>
 
                 <p class="card-text"  th:text="${post.description}"></p>
-                <a th:href="${post.file}" class="card-link">Go To File Link</a>
+                <a th:href="${post.file}" class="card-link" target="_blank">Go To File </a>
 
             </div>
         </div>
     </div>
+
+    <!--    <table class="table table-bordered">-->
+    <!--        <thead class="thead-light">-->
+    <!--        <tr>-->
+    <!--            <th>ชื่อเรื่อง</th>-->
+    <!--            <th>คำอธิบาย</th>-->
+    <!--            <th>ไฟล์</th>-->
+    <!--        </tr>-->
+    <!--        </thead>-->
+    <!--        <tbody>-->
+    <!--        <tr th:each="post: ${allPost}">-->
+    <!--            <td th:text="${post.namePost}"></td>-->
+    <!--            <td th:text="${post.description}"></td>-->
+
+    <!--            <td>-->
+    <!--                <a th:href="${post.file}">link file</a>-->
+    <!--            </td>-->
+    <!--        </tr>-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+
+
+
+
+
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script th:src="@{js/bootstrap.min.js}"></script>
 </body>
 </html>
-
-
-
